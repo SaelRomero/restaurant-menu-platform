@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Digital</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <header id="restaurant-header" class="hidden">
+            <img id="logo" src="" alt="Logo">
+            <h1 id="restaurant-name"></h1>
+            <p id="restaurant-address"></p>
+        </header>
+
+        <nav id="category-tabs" class="hidden">
+            <!-- Tabs injected via JS -->
+        </nav>
+
+        <main id="menu-container" class="hidden">
+            <!-- Items injected via JS -->
+        </main>
+
+        <div id="loading" class="spinner">
+            Cargando menú...
+        </div>
+        
+        <div id="error" class="hidden error-msg">
+            No se pudo cargar el menú. Asegúrate de escanear el QR correcto.
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
