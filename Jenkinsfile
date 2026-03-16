@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh '''
                 # Detener proceso actual si existe
-                pkill -f "dotnet run.*5006" || true
+                pkill -f "MenuDigital.Api.dll" || true
                 
                 cd MenuDigital.Api
                 
@@ -47,7 +47,7 @@ pipeline {
                 export ASPNETCORE_ENVIRONMENT=Production
                 export BUILD_ID=dontKillMe
                 export JENKINS_NODE_COOKIE=dontKillMe
-                nohup dotnet run -c Release --no-build --urls "http://127.0.0.1:${PORT}" > api.log 2>&1 &
+                nohup dotnet bin/Release/net9.0/MenuDigital.Api.dll --urls "http://127.0.0.1:${PORT}" > api.log 2>&1 &
                 
                 # Esperar a que levante
                 sleep 5
