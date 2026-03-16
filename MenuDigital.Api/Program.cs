@@ -30,11 +30,11 @@ using (var scope = app.Services.CreateScope())
     {
         var demoRestaurant = new Restaurant
         {
-            Name = "Ramona's Pizza Demo",
-            Slug = "ramonas-pizza",
-            LogoUrl = "https://ui-avatars.com/api/?name=Ramonas+Pizza&background=random&size=256",
-            Address = "Blvd. Principal 123",
-            Phone = "6611192099",
+            Name = "Restaurante Demo",
+            Slug = "demo",
+            LogoUrl = "https://ui-avatars.com/api/?name=Restaurante+Demo&background=random&size=256",
+            Address = "Dirección de ejemplo",
+            Phone = "5551234567",
             IsActive = true
         };
 

@@ -1,14 +1,14 @@
 const API_BASE = window.location.origin;
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Determine slug from URL, e.g. domain.com/ramonas-pizza
-    // Since static files serve index.html, the path might just be /ramonas-pizza
+    // Determine slug from URL, e.g. domain.com/demo
+    // Since static files serve index.html, the path might just be /demo
     // Let's grab the slug from pathname
     let slug = window.location.pathname.replace(/^\/|\/$/g, '');
     
     // If empty or index.html, fallback to demo slug for easy testing
     if (!slug || slug.includes('index.html')) {
-        slug = 'ramonas-pizza';
+        slug = 'demo';
     }
 
     try {
