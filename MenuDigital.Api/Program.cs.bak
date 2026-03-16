@@ -1,0 +1,4 @@
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+app.MapGet("/", (IWebHostEnvironment env) => env.WebRootPath);
+app.Run("http://127.0.0.1:5007");

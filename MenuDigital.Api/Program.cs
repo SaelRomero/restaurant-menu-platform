@@ -69,4 +69,6 @@ app.MapGet("/health", () => Results.Ok(new { Status = "Healthy", Timestamp = Dat
 app.MapMenuEndpoints();
 app.MapAdminEndpoints();
 
+app.MapFallbackToFile("index.html");
+
 app.Run();
