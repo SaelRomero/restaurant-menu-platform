@@ -1,19 +1,30 @@
 const API_BASE = window.location.origin;
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Determine slug from URL, e.g. domain.com/demo
-    // Since static files serve index.html, the path might just be /demo
-    // Let's grab the slug from pathname
-    let slug = window.location.pathname.replace(/^\/|\/$/g, '');
+    // Determine slug from URL, considering Nginx proxy at /menu/
+    let path = window.location.pathname.replace(/^\/|\/$/g, '');
+    let slug = '';
     
-    // If empty or index.html, fallback to demo slug for easy testing
+    if (path.startsWith('menu/')) {
+        slug = path.replace('menu/', '');
+    } else if (path === 'menu') {
+        slug = '';
+    } else {
+        slug = path;
+    }
+
+    // If empty or index.html, fallback to demo slug
     if (!slug || slug.includes('index.html')) {
         slug = 'demo';
     }
 
+    // Usaremos /menu/slug/endpoint si estamos detrás del proxy para que concuerde con Nginx
+    // o simplemente /slug si corremos standalone. Validemos si la URI real tiene /menu.
+    const apiPrefix = window.location.pathname.includes('/menu') ? '/menu' : '';
+
     try {
         // 1. Fetch Restaurant Info
-        const resResponse = await fetch(`${API_BASE}/${slug}/restaurant`);
+        const resResponse = await fetch(`${API_BASE}${apiPrefix}/${slug}/restaurant`);
         if (!resResponse.ok) throw new Error('Restaurante no encontrado');
         const restaurant = await resResponse.json();
 
@@ -22,13 +33,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('restaurant-address').textContent = restaurant.address;
 
         // 2. Fetch Categories
-        const catResponse = await fetch(`${API_BASE}/${slug}/categories`);
+        const catResponse = await fetch(`${API_BASE}${apiPrefix}/${slug}/categories`);
         const categories = await catResponse.json();
         
         if (categories.length > 0) {
-            renderTabs(categories, slug);
+            renderTabs(categories, slug, apiPrefix);
             // Auto-load first category items
-            await loadCategoryItems(slug, categories[0].id);
+            await loadCategoryItems(slug, categories[0].id, apiPrefix);
         } else {
             document.getElementById('menu-container').innerHTML = '<p style="text-align:center;color:var(--text-secondary);margin-top:2rem;">No hay categorías disponibles.</p>';
         }
@@ -46,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-function renderTabs(categories, slug) {
+function renderTabs(categories, slug, apiPrefix) {
     const tabsContainer = document.getElementById('category-tabs');
     tabsContainer.innerHTML = '';
     
@@ -61,18 +72,18 @@ function renderTabs(categories, slug) {
             // Scroll to center tab
             btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             // Load items
-            await loadCategoryItems(slug, cat.id);
+            await loadCategoryItems(slug, cat.id, apiPrefix);
         };
         tabsContainer.appendChild(btn);
     });
 }
 
-async function loadCategoryItems(slug, categoryId) {
+async function loadCategoryItems(slug, categoryId, apiPrefix) {
     const container = document.getElementById('menu-container');
     container.innerHTML = '<div style="text-align:center;padding:2rem;">Cargando platillos...</div>';
 
     try {
-        const response = await fetch(`${API_BASE}/${slug}/items/${categoryId}`);
+        const response = await fetch(`${API_BASE}${apiPrefix}/${slug}/items/${categoryId}`);
         const items = await response.json();
 
         container.innerHTML = '';
