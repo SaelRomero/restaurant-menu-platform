@@ -16,7 +16,7 @@ namespace MenuDigital.Infrastructure.Services
         public async Task<RestaurantDto?> GetRestaurantBySlugAsync(string slug)
         {
             var r = await _context.Restaurants.AsNoTracking().FirstOrDefaultAsync(x => x.Slug == slug);
-            return r == null ? null : new RestaurantDto(r.Id, r.Name, r.Slug, r.LogoUrl, r.Address, r.Phone, r.IsActive);
+            return r == null ? null : new RestaurantDto(r.Id, r.Name, r.Slug, r.LogoUrl, r.BannerUrl, r.Address, r.Phone, r.WhatsappNumber, r.IsActive);
         }
 
         public async Task<List<CategoryDto>> GetCategoriesAsync(string slug)

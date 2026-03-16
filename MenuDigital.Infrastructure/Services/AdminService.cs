@@ -15,10 +15,10 @@ namespace MenuDigital.Infrastructure.Services
 
         public async Task<RestaurantDto> CreateRestaurantAsync(CreateRestaurantDto dto)
         {
-            var r = new Restaurant { Name = dto.Name, Slug = dto.Slug, LogoUrl = dto.LogoUrl, Address = dto.Address, Phone = dto.Phone };
+            var r = new Restaurant { Name = dto.Name, Slug = dto.Slug, LogoUrl = dto.LogoUrl, BannerUrl = dto.BannerUrl, Address = dto.Address, Phone = dto.Phone, WhatsappNumber = dto.WhatsappNumber };
             _context.Restaurants.Add(r);
             await _context.SaveChangesAsync();
-            return new RestaurantDto(r.Id, r.Name, r.Slug, r.LogoUrl, r.Address, r.Phone, r.IsActive);
+            return new RestaurantDto(r.Id, r.Name, r.Slug, r.LogoUrl, r.BannerUrl, r.Address, r.Phone, r.WhatsappNumber, r.IsActive);
         }
 
         public async Task<CategoryDto> CreateCategoryAsync(int restaurantId, CreateCategoryDto dto)

@@ -33,8 +33,10 @@ using (var scope = app.Services.CreateScope())
             Name = "Restaurante Demo",
             Slug = "demo",
             LogoUrl = "https://ui-avatars.com/api/?name=Restaurante+Demo&background=random&size=256",
+            BannerUrl = null,
             Address = "Dirección de ejemplo",
             Phone = "5551234567",
+            WhatsappNumber = "5216641234567",
             IsActive = true
         };
 
