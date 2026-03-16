@@ -62,10 +62,11 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseStaticFiles();
+
 app.MapGet("/health", () => Results.Ok(new { Status = "Healthy", Timestamp = DateTime.UtcNow }));
 
 app.MapMenuEndpoints();
 app.MapAdminEndpoints();
 
-app.UseStaticFiles();
 app.Run();

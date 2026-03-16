@@ -13,7 +13,7 @@ namespace MenuDigital.Api.Endpoints
         {
             var group = app.MapGroup("");
 
-            group.MapGet("/{slug}", (string slug, IWebHostEnvironment env) =>
+            group.MapGet("/{slug:regex(^(?!.*\\\\.).*$)}", (string slug, IWebHostEnvironment env) =>
             {
                 var filePath = Path.Combine(env.WebRootPath, "index.html");
                 return Results.File(filePath, "text/html");
