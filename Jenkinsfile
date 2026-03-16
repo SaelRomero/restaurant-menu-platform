@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PORT = '5006'
+        PORT = '5008'
     }
 
     stages {
