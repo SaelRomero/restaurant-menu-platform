@@ -51,7 +51,7 @@ using (var scope = app.Services.CreateScope())
         context.SaveChanges();
 
         context.MenuItems.AddRange(
-            new MenuItem { Name = "Pizza Pepperoni", Description = "Clásica con queso mozzarella", Price = 150m, CategoryId = catPizzas.Id, PhotoUrl = "https://images.unsplash.com/photo-1534308983496-4fabb1a015ce?w=400&q=80" },
+            new MenuItem { Name = "Pizza Pepperoni", Description = "Clásica con queso mozzarella", Price = 150m, CategoryId = catPizzas.Id, PhotoUrl = "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&q=80" },
             new MenuItem { Name = "Pizza Hawaiana", Description = "Piña y jamón", Price = 160m, CategoryId = catPizzas.Id, PhotoUrl = "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80" },
             new MenuItem { Name = "Pizza Mexicana", Description = "Chorizo, jalapeño y cebolla", Price = 180m, CategoryId = catPizzas.Id, IsPromotion = true, DiscountPercent = 10, PhotoUrl = "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80" },
             new MenuItem { Name = "Refresco Cola", Description = "600 ml", Price = 30m, CategoryId = catBebidas.Id, PhotoUrl = "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&q=80" },

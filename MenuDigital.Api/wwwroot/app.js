@@ -142,7 +142,7 @@ async function loadCategoryItems(slug, categoryId, apiPrefix) {
             let html = '';
             
             if (item.photoUrl) {
-                html += `<img src="${item.photoUrl}" alt="${item.name}" class="menu-img">`;
+                html += `<img src="${item.photoUrl}" alt="${item.name}" class="menu-img" onerror="this.onerror=null;this.src='/menu/placeholder-food.png';">`;
             }
             
             if (hasPromo) {
