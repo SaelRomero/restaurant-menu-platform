@@ -38,8 +38,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                # Detener proceso actual si existe
-                pkill -f "MenuDigital.Api.dll" || true
+                # Identificar PID del proceso ocupando el puerto
+                PID=$(ss -lptn "sport = :${PORT}" | grep -oP 'pid=\\K[0-9]+' | head -1 || true)
+                if [ ! -z "$PID" ]; then
+                    echo "Matando proceso anterior en puerto ${PORT} (PID: $PID)"
+                    kill -9 $PID || true
+                fi
                 
                 cd MenuDigital.Api
                 
